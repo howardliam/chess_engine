@@ -27,3 +27,44 @@ impl ChessMove {
         return Square::new(square);
     }
 }
+
+pub enum TurnFlag {
+    None,
+    DoubleAdvance,
+    EnPassantCapture,
+    Promotion(PromotionKind),
+}
+
+pub enum PromotionKind {
+    Knight,
+    Bishop,
+    Rook,
+    Queen,
+}
+
+/// A move but is called turn since move is reserved
+pub struct Turn {
+    pub start: Square,
+    pub target: Square,
+    pub flag: TurnFlag,
+}
+
+impl Turn {
+    pub fn new(start: Square, target: Square, flag: TurnFlag) -> Self {
+        Turn {
+            start,
+            target,
+            flag,
+        }
+    }
+}
+
+impl Default for Turn {
+    fn default() -> Self {
+        Self {
+            start: Square::new(0),
+            target: Square::new(0),
+            flag: TurnFlag::None,
+        }
+    }
+}

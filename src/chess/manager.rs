@@ -1,6 +1,6 @@
 use crate::chess::fen::{fen_is_valid, Fen};
 
-use super::{board::Board, chess_move::ChessMove, colour::Colour, game_state::GameState};
+use super::{board::Board, colour::Colour, game_state::GameState, turn::ChessMove};
 
 pub struct GameManager {
     pub player_side: Colour,

@@ -1,6 +1,5 @@
 pub mod board;
 pub mod castling;
-pub mod chess_move;
 pub mod colour;
 pub mod coord;
 pub mod direction;
@@ -9,3 +8,4 @@ pub mod game_state;
 pub mod manager;
 pub mod piece;
 pub mod square;
+pub mod turn;
