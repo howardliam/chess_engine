@@ -1,4 +1,4 @@
-use std::ops::Add;
+use std::ops::{Add, Sub};
 
 #[derive(Clone, Copy)]
 pub struct Square {
@@ -29,6 +29,14 @@ impl Add<i32> for Square {
     type Output = Self;
 
     fn add(self, rhs: i32) -> Self::Output {
-        todo!()
+        Square::from(self.to_index() + rhs as usize)
+    }
+}
+
+impl Sub<i32> for Square {
+    type Output = Self;
+
+    fn sub(self, rhs: i32) -> Self::Output {
+        Square::from(self.to_index() - rhs as usize)
     }
 }
