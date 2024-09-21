@@ -24,11 +24,20 @@ impl Board {
         let mut square = Square::from(Coord::new(Coord::FILE_A, Coord::RANK_8));
         for ch in fen_layout.chars() {
             if ch == '/' {
-                square -= 8;
+                square -= 16;
+                continue;
+            }
+
+            if ch.is_digit(10) {
+                square += ch.to_digit(10).unwrap() as i32;
+            } else {
+                let piece = Piece::from(ch);
+                board[square.0] = Some(piece);
+                square += 1;
             }
         }
 
-        todo!()
+        Self { board }
     }
 }
 
@@ -116,7 +125,7 @@ impl fmt::Display for Board {
             for piece_option in chunk {
                 let piece_glyph = match piece_option {
                     Some(piece) => piece.to_string(),
-                    None => " ".to_owned(),
+                    None => "•".to_owned(),
                 };
 
                 row.push_str(format!(" {}", piece_glyph).as_str());

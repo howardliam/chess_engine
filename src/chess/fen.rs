@@ -29,6 +29,8 @@ pub struct Fen {
 }
 
 impl Fen {
+    pub const STARTING_POSITION: &str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
     pub fn from(fen: String) -> Result<Self, InvalidFenError> {
         if !fen_is_valid(&fen) {
             return Err(InvalidFenError);
