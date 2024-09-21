@@ -29,7 +29,6 @@ pub struct Fen {
 }
 
 impl Fen {
-    // TODO add errors
     pub fn from(fen: String) -> Result<Self, InvalidFenError> {
         if !fen_is_valid(&fen) {
             return Err(InvalidFenError);
