@@ -1,6 +1,6 @@
 use std::fmt;
 
-use crate::chess::square::{Coord, Square};
+use crate::chess::{coord::Coord, square::Square};
 
 use super::{colour::Colour, piece::Piece};
 
@@ -21,7 +21,7 @@ impl Board {
     pub fn from_fen(fen_layout: String) -> Self {
         let mut board: [Option<Piece>; Self::SIZE] = [None; Self::SIZE];
 
-        let mut square = Square::from(Coord::new(0, 7));
+        let mut square = Square::from(Coord::new(Coord::FILE_A, Coord::RANK_8));
         for ch in fen_layout.chars() {
             if ch == '/' {
                 square -= 8;
