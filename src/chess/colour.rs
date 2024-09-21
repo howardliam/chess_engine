@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::fmt;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Colour {
@@ -15,7 +15,7 @@ impl Colour {
     }
 }
 
-impl Display for Colour {
+impl fmt::Display for Colour {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let string = match self {
             Colour::White => "White".to_owned(),

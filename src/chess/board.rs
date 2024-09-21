@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::fmt;
 
 use super::{colour::Colour, piece::Piece};
 
@@ -92,7 +92,7 @@ impl Default for Board {
     }
 }
 
-impl Display for Board {
+impl fmt::Display for Board {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut output: Vec<String> = Vec::new();
         output.push("  A B C D E F G H".to_owned());

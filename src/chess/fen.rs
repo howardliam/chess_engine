@@ -1,4 +1,14 @@
+use core::fmt;
+
 use regex::Regex;
+
+pub struct InvalidFenError;
+
+impl fmt::Display for InvalidFenError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "invalid FEN")
+    }
+}
 
 pub fn fen_is_valid(fen: &String) -> bool {
     let regex = Regex::new(
@@ -14,30 +24,37 @@ pub struct Fen {
     pub side_to_move: String,
     pub castling_rights: String,
     pub en_passant_square: String,
-    pub halfmove_clock: String,
-    pub fullmove_number: String,
+    pub halfmove_clock: i32,
+    pub fullmove_number: i32,
 }
 
 impl Fen {
     // TODO add errors
-    pub fn from(fen: String) -> Result<Self, ()> {
+    pub fn from(fen: String) -> Result<Self, InvalidFenError> {
         if !fen_is_valid(&fen) {
-            return Err(());
+            return Err(InvalidFenError);
         }
 
         let fragments = fen.split(' ').collect::<Vec<&str>>();
 
         if fragments.len() != 6 {
-            return Err(());
+            return Err(InvalidFenError);
         }
+
+        let halfmove_clock = fragments[4]
+            .parse::<i32>()
+            .expect("Halfmove clock should have parsed just fine");
+        let fullmove_number = fragments[5]
+            .parse::<i32>()
+            .expect("Fullmove number should have parsed just fine");
 
         Ok(Self {
             board_layout: fragments[0].to_owned(),
             side_to_move: fragments[1].to_owned(),
             castling_rights: fragments[2].to_owned(),
             en_passant_square: fragments[3].to_owned(),
-            halfmove_clock: fragments[4].to_owned(),
-            fullmove_number: fragments[5].to_owned(),
+            halfmove_clock,
+            fullmove_number,
         })
     }
 }
