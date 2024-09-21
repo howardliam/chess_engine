@@ -1,3 +1,5 @@
+use crate::chess::fen::fen_is_valid;
+
 use super::{board::Board, chess_move::ChessMove, colour::Colour, game::GameState};
 
 pub struct GameManager {
@@ -14,6 +16,10 @@ impl GameManager {
     }
 
     pub fn apply_fen(&mut self, fen: String) {
+        if !fen_is_valid(fen) {
+            panic!("Invalid FEN");
+        }
+
         todo!()
     }
 
