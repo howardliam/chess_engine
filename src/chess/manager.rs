@@ -13,6 +13,14 @@ impl GameManager {
         Self::default()
     }
 
+    pub fn apply_fen(&mut self, fen: String) {
+        todo!()
+    }
+
+    pub fn dump_fen(&self) -> String {
+        todo!()
+    }
+
     pub fn make_move(chess_move: ChessMove) {}
 }
 
