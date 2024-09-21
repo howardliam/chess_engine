@@ -10,4 +10,10 @@ impl Board {
     }
 }
 
+impl Default for Board {
+    fn default() -> Self {
+        Self { board: [None; 64] }
+    }
+}
+
 pub struct Bitboard(u64);
