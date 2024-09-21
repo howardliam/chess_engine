@@ -1,27 +1,40 @@
-use std::ops::{Add, Sub};
+use std::ops::{Add, AddAssign, Sub, SubAssign};
+
+#[derive(Clone, Copy)]
+pub struct Coord {
+    pub file: i32,
+    pub rank: i32,
+}
+
+impl Coord {
+    pub fn new(file: i32, rank: i32) -> Self {
+        Self { file, rank }
+    }
+}
 
 #[derive(Clone, Copy)]
 pub struct Square {
-    pub file: u8,
-    pub rank: u8,
+    pub square: usize,
 }
 
 impl Square {
-    pub fn new(file: u8, rank: u8) -> Self {
-        Self { file, rank }
+    pub fn new(square: usize) -> Self {
+        Self { square }
     }
 
-    pub fn to_index(&self) -> usize {
-        ((self.rank * 8) + self.file) as usize
+    pub fn to_coord(&self) -> Coord {
+        let file = (self.square & 0b111) as i32;
+        let rank = ((self.square >> 3) & 0b111) as i32;
+
+        Coord::new(file, rank)
     }
 }
 
-impl From<usize> for Square {
-    fn from(value: usize) -> Self {
-        let file = (value & 0b111) as u8;
-        let rank = ((value >> 3) & 0b111) as u8;
+impl From<Coord> for Square {
+    fn from(value: Coord) -> Self {
+        let square = (value.rank * 8 + value.file) as usize;
 
-        Self::new(file, rank)
+        Self::new(square)
     }
 }
 
@@ -29,7 +42,7 @@ impl Add<i32> for Square {
     type Output = Self;
 
     fn add(self, rhs: i32) -> Self::Output {
-        Square::from(self.to_index() + rhs as usize)
+        Square::new(self.square + rhs as usize)
     }
 }
 
@@ -37,6 +50,18 @@ impl Sub<i32> for Square {
     type Output = Self;
 
     fn sub(self, rhs: i32) -> Self::Output {
-        Square::from(self.to_index() - rhs as usize)
+        Square::new(self.square - rhs as usize)
+    }
+}
+
+impl AddAssign<i32> for Square {
+    fn add_assign(&mut self, rhs: i32) {
+        self.square += rhs as usize;
+    }
+}
+
+impl SubAssign<i32> for Square {
+    fn sub_assign(&mut self, rhs: i32) {
+        self.square -= rhs as usize;
     }
 }

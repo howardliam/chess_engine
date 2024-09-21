@@ -1,5 +1,7 @@
 use std::fmt;
 
+use crate::chess::square::{Coord, Square};
+
 use super::{colour::Colour, piece::Piece};
 
 pub struct Board {
@@ -15,9 +17,12 @@ impl Board {
     pub fn from_fen(fen_layout: String) -> Self {
         let mut board: [Option<Piece>; 64] = [None; 64];
 
-        let rank = 0;
-        let file = 7;
-        for ch in fen_layout.chars() {}
+        let mut square = Square::from(Coord::new(0, 7));
+        for ch in fen_layout.chars() {
+            if ch == '/' {
+                square -= 8;
+            }
+        }
 
         todo!()
     }
