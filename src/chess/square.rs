@@ -1,16 +1,6 @@
 use std::ops::{Add, AddAssign, Sub, SubAssign};
 
-#[derive(Clone, Copy)]
-pub struct Coord {
-    pub file: i32,
-    pub rank: i32,
-}
-
-impl Coord {
-    pub fn new(file: i32, rank: i32) -> Self {
-        Self { file, rank }
-    }
-}
+use super::{coord::Coord, direction::Direction};
 
 #[derive(Clone, Copy)]
 pub struct Square(pub usize);
@@ -60,6 +50,34 @@ impl AddAssign<i32> for Square {
 
 impl SubAssign<i32> for Square {
     fn sub_assign(&mut self, rhs: i32) {
+        self.0 -= rhs as usize;
+    }
+}
+
+impl Add<Direction> for Square {
+    type Output = Self;
+
+    fn add(self, rhs: Direction) -> Self::Output {
+        Square::new(self.0 + rhs as usize)
+    }
+}
+
+impl Sub<Direction> for Square {
+    type Output = Self;
+
+    fn sub(self, rhs: Direction) -> Self::Output {
+        Square::new(self.0 - rhs as usize)
+    }
+}
+
+impl AddAssign<Direction> for Square {
+    fn add_assign(&mut self, rhs: Direction) {
+        self.0 += rhs as usize;
+    }
+}
+
+impl SubAssign<Direction> for Square {
+    fn sub_assign(&mut self, rhs: Direction) {
         self.0 -= rhs as usize;
     }
 }

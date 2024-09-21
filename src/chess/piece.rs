@@ -83,6 +83,7 @@ impl Piece {
 }
 
 impl From<char> for Piece {
+    /// Assumes the character is valid from FEN. Panics otherwise.
     fn from(value: char) -> Self {
         let colour = match value.is_uppercase() {
             true => Colour::White,
