@@ -106,18 +106,18 @@ impl From<char> for Piece {
 impl ToString for Piece {
     fn to_string(&self) -> String {
         match (self.colour, self.kind) {
-            (Colour::White, PieceKind::Pawn) => "♙".to_owned(),
-            (Colour::White, PieceKind::Knight) => "♘".to_owned(),
-            (Colour::White, PieceKind::Bishop) => "♗".to_owned(),
-            (Colour::White, PieceKind::Rook) => "♖".to_owned(),
-            (Colour::White, PieceKind::Queen) => "♕".to_owned(),
-            (Colour::White, PieceKind::King) => "♔".to_owned(),
-            (Colour::Black, PieceKind::Pawn) => "♟".to_owned(),
-            (Colour::Black, PieceKind::Knight) => "♞".to_owned(),
-            (Colour::Black, PieceKind::Bishop) => "♝".to_owned(),
-            (Colour::Black, PieceKind::Rook) => "♜".to_owned(),
-            (Colour::Black, PieceKind::Queen) => "♛".to_owned(),
-            (Colour::Black, PieceKind::King) => "♚".to_owned(),
+            (Colour::White, PieceKind::Pawn) => "♟".to_owned(),
+            (Colour::White, PieceKind::Knight) => "♞".to_owned(),
+            (Colour::White, PieceKind::Bishop) => "♝".to_owned(),
+            (Colour::White, PieceKind::Rook) => "♜".to_owned(),
+            (Colour::White, PieceKind::Queen) => "♛".to_owned(),
+            (Colour::White, PieceKind::King) => "♚".to_owned(),
+            (Colour::Black, PieceKind::Pawn) => "♙".to_owned(),
+            (Colour::Black, PieceKind::Knight) => "♘".to_owned(),
+            (Colour::Black, PieceKind::Bishop) => "♗".to_owned(),
+            (Colour::Black, PieceKind::Rook) => "♖".to_owned(),
+            (Colour::Black, PieceKind::Queen) => "♕".to_owned(),
+            (Colour::Black, PieceKind::King) => "♔".to_owned(),
         }
     }
 }

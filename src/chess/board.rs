@@ -87,20 +87,25 @@ impl Default for Board {
 
 impl Display for Board {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let mut string = String::new();
+        let mut output: Vec<String> = Vec::new();
+        output.push("  A B C D E F G H".to_owned());
 
-        for (i, piece_option) in self.board.iter().enumerate() {
-            if i % 8 == 0 {
-                string.push('\n');
+        let board_chunks = self.board.chunks(8);
+        for (i, chunk) in board_chunks.enumerate() {
+            let mut row = String::from(format!("{}", i % 8 + 1));
+            for piece_option in chunk {
+                let piece_glyph = match piece_option {
+                    Some(piece) => piece.to_string(),
+                    None => " ".to_owned(),
+                };
+
+                row.push_str(format!(" {}", piece_glyph).as_str());
             }
-            let piece_glyph = match piece_option {
-                Some(piece) => piece.to_string(),
-                None => " ".to_owned(),
-            };
-            string.push_str(format!(" {}", piece_glyph).as_str());
+            output.push(row);
         }
+        output.reverse();
 
-        write!(f, "{}", string)
+        write!(f, "{}", output.join("\n"))
     }
 }
 
