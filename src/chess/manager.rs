@@ -41,9 +41,9 @@ impl GameManager {
             side_to_move,
             white_castling_rights,
             black_castling_rights,
-            en_passant_square,
-            halfmove_clock,
-            fullmove_number,
+            en_passant_square: _,
+            halfmove_clock: _,
+            fullmove_number: _,
         } = &self.game_state;
 
         let wcr = white_castling_rights.to_string_colour(Colour::White);
