@@ -5,17 +5,21 @@ use crate::chess::square::{Coord, Square};
 use super::{colour::Colour, piece::Piece};
 
 pub struct Board {
-    pub board: [Option<Piece>; 64],
+    pub board: [Option<Piece>; Self::SIZE],
 }
 
 impl Board {
+    pub const SIZE: usize = 64;
+
     pub fn new() -> Self {
-        Self { board: [None; 64] }
+        Self {
+            board: [None; Self::SIZE],
+        }
     }
 
     /// Parses the board layout fragment of FEN into board layout
     pub fn from_fen(fen_layout: String) -> Self {
-        let mut board: [Option<Piece>; 64] = [None; 64];
+        let mut board: [Option<Piece>; Self::SIZE] = [None; Self::SIZE];
 
         let mut square = Square::from(Coord::new(0, 7));
         for ch in fen_layout.chars() {
