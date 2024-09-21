@@ -24,13 +24,17 @@ pub struct Fen {
 
 impl Fen {
     pub const STARTING_POSITION: &str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+}
 
-    pub fn from(fen: String) -> Result<Self, InvalidFenError> {
-        if !fen_is_valid(&fen) {
+impl TryFrom<String> for Fen {
+    type Error = InvalidFenError;
+
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        if !fen_is_valid(&value) {
             return Err(InvalidFenError);
         }
 
-        let fragments = fen.split(' ').collect::<Vec<&str>>();
+        let fragments = value.split(' ').collect::<Vec<&str>>();
 
         if fragments.len() != 6 {
             return Err(InvalidFenError);

@@ -5,7 +5,7 @@ pub mod colour;
 pub mod coord;
 pub mod direction;
 pub mod fen;
-pub mod game;
+pub mod game_state;
 pub mod manager;
 pub mod piece;
 pub mod square;

@@ -18,7 +18,7 @@ impl Board {
     }
 
     /// Parses the board layout fragment of FEN into board layout
-    pub fn from_fen(fen_layout: String) -> Self {
+    pub fn from_fen(fen_layout: &String) -> Self {
         let mut board: [Option<Piece>; Self::SIZE] = [None; Self::SIZE];
 
         let mut rank = Coord::RANK_8;

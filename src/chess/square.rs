@@ -114,18 +114,8 @@ impl fmt::Display for Square {
         let rank = (self.0 >> 3) & 0b111;
 
         let file_char = (file as u8 + b'a') as char;
+        let rank_char = (rank as u8 + b'1') as char;
 
-        write!(f, "{}{}", file_char, rank)
+        write!(f, "{}{}", file_char, rank_char)
     }
 }
-
-// impl ToString for Square {
-//     fn to_string(&self) -> String {
-//         let file = self.0 & 0b111;
-//         let rank = (self.0 >> 3) & 0b111;
-
-//         let file_char = (file as u8 + b'a') as char;
-
-//         format!("{}{}", file_char, rank)
-//     }
-// }
