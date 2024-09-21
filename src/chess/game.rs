@@ -1,4 +1,4 @@
-use super::{castling::CastlingRights, colour::Colour, square::Square};
+use super::{castling::CastlingRights, colour::Colour, fen::Fen, square::Square};
 
 /// Representation of the state of a game of chess, not including the board.
 pub struct GameState {
@@ -14,22 +14,16 @@ pub struct GameState {
 }
 
 impl GameState {
-    pub fn from_fen(fen: String) -> Self {
-        let parts = fen.split(' ').collect::<Vec<&str>>();
-
-        let side_to_move = match parts[1] {
-            "w" => Colour::White,
-            "b" => Colour::Black,
-            _ => panic!("Bad FEN"),
-        };
+    pub fn from_fen(fen_fragments: Fen) -> Self {
+        let side_to_move = Colour::from(fen_fragments.side_to_move);
 
         let (white_castling_rights, black_castling_rights) =
-            CastlingRights::from_fen_part(parts[2].to_owned());
+            CastlingRights::from_fen_part(fen_fragments.castling_rights);
 
-        let en_passant_square = None;
+        let en_passant_square = Square::from_en_passant(fen_fragments.en_passant_square);
 
-        let halfmove_clock = parts[4].parse::<i32>().unwrap_or_default();
-        let fullmove_number = parts[5].parse::<i32>().unwrap_or_default();
+        let halfmove_clock = fen_fragments.halfmove_clock;
+        let fullmove_number = fen_fragments.fullmove_number;
 
         Self {
             side_to_move,

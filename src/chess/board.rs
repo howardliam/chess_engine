@@ -21,10 +21,12 @@ impl Board {
     pub fn from_fen(fen_layout: String) -> Self {
         let mut board: [Option<Piece>; Self::SIZE] = [None; Self::SIZE];
 
-        let mut square = Square::from(Coord::new(Coord::FILE_A, Coord::RANK_8));
+        let mut rank = Coord::RANK_8;
+        let mut square = Square::from(Coord::new(Coord::FILE_A, rank));
         for ch in fen_layout.chars() {
             if ch == '/' {
-                square -= 16;
+                rank -= 1;
+                square = Square::from(Coord::new(Coord::FILE_A, rank));
                 continue;
             }
 

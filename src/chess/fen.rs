@@ -2,13 +2,7 @@ use core::fmt;
 
 use regex::Regex;
 
-pub struct InvalidFenError;
-
-impl fmt::Display for InvalidFenError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "invalid FEN")
-    }
-}
+use crate::errors::InvalidFenError;
 
 pub fn fen_is_valid(fen: &String) -> bool {
     let regex = Regex::new(

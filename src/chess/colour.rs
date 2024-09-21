@@ -6,6 +6,17 @@ pub enum Colour {
     Black,
 }
 
+impl From<String> for Colour {
+    /// Assumes w or b, panics otherwise.
+    fn from(value: String) -> Self {
+        match value.as_str() {
+            "w" => Self::White,
+            "b" => Self::Black,
+            _ => panic!("This should be inaccessible"),
+        }
+    }
+}
+
 impl Colour {
     pub fn invert(&self) -> Self {
         match self {
