@@ -33,6 +33,7 @@ pub enum TurnFlag {
     DoubleAdvance,
     EnPassantCapture,
     Promotion(PromotionKind),
+    Castling(CastlingKind),
 }
 
 pub enum PromotionKind {
@@ -40,6 +41,11 @@ pub enum PromotionKind {
     Bishop,
     Rook,
     Queen,
+}
+
+pub enum CastlingKind {
+    KingSide,
+    QueenSide,
 }
 
 /// A move but is called turn since move is reserved
