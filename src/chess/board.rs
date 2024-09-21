@@ -10,6 +10,13 @@ impl Board {
     pub fn new() -> Self {
         Self { board: [None; 64] }
     }
+
+    /// Parses the board layout fragment of FEN into board layout
+    pub fn from_fen(fen: String) -> Self {
+        let mut board: [Option<Piece>; 64] = [None; 64];
+
+        todo!()
+    }
 }
 
 impl Default for Board {
