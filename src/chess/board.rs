@@ -12,8 +12,12 @@ impl Board {
     }
 
     /// Parses the board layout fragment of FEN into board layout
-    pub fn from_fen(fen: String) -> Self {
+    pub fn from_fen(fen_layout: String) -> Self {
         let mut board: [Option<Piece>; 64] = [None; 64];
+
+        let rank = 0;
+        let file = 7;
+        for ch in fen_layout.chars() {}
 
         todo!()
     }

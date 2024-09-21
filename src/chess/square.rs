@@ -1,3 +1,5 @@
+use std::ops::Add;
+
 #[derive(Clone, Copy)]
 pub struct Square {
     pub file: u8,
@@ -20,5 +22,13 @@ impl From<usize> for Square {
         let rank = ((value >> 3) & 0b111) as u8;
 
         Self::new(file, rank)
+    }
+}
+
+impl Add<i32> for Square {
+    type Output = Self;
+
+    fn add(self, rhs: i32) -> Self::Output {
+        todo!()
     }
 }

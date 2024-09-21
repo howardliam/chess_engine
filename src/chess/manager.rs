@@ -1,4 +1,4 @@
-use crate::chess::fen::fen_is_valid;
+use crate::chess::fen::{fen_is_valid, Fen};
 
 use super::{board::Board, chess_move::ChessMove, colour::Colour, game::GameState};
 
@@ -11,16 +11,22 @@ pub struct GameManager {
 }
 
 impl GameManager {
-    pub fn new() -> Self {
-        Self::default()
+    pub fn new(player_side: Colour, engine_side: Colour) -> Self {
+        Self {
+            player_side,
+            engine_side,
+            board: Board::default(),
+            game_state: GameState::default(),
+        }
     }
 
-    pub fn apply_fen(&mut self, fen: String) {
-        if !fen_is_valid(fen) {
-            panic!("Invalid FEN");
-        }
+    pub fn apply_fen(&mut self, fen_string: String) {
+        let fen_fragments = match Fen::from(fen_string) {
+            Ok(fen) => fen,
+            Err(err) => panic!("{err}"),
+        };
 
-        todo!()
+        self.board = Board::from_fen(fen_fragments.board_layout);
     }
 
     pub fn dump_fen(&self) -> String {
